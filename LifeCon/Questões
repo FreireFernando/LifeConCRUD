@@ -1,0 +1,110 @@
+###################################################
+1.Reescreva as classes acima aplicando o conceito de polimorfismo. É permitido criar novas classes, se julgar necessário.
+Ver código "polimorfism.php" neste diretório.
+
+
+###################################################
+2.  Construa um programa que execute a divisão. O dividendo encontra-se na posição A e o divisor na B. Ao final do programa,
+o resultado deve estar na posição C e o resto na posição D. As posições de memória restantes podem ser usadas livremente para a
+execução das operações, caso necessário.
+
+LINHA | OPERAÇÃO | PARÂMETRO
+1       INI         
+2       CLR
+3       PUT         C
+4       LOAD        C
+5       SUB         A
+6       PUT         C
+7       LOAD        B
+8       INC         
+9       PUT         D
+10      JNZ         04
+11      TERM
+12
+13
+14
+15
+16
+
+###################################################
+3. Qual a diferença entre um LEFT JOIN e um INNER JOIN?
+
+Um inner join traz como resultado da consulta todos os elementos das tabelas envolvidas (ex: todas as colunas de A e B). Já no Left join, ele traz como resultado da consulta os elementos que pertencem à primeira tabela relacionada. (ex: somente colunas da A com a mescla de resultados da B).
+
+
+###################################################
+4.  Descreva, com suas palavras, o que, no framework Laravel, é o Eloquent, qual é a sua vantagem em relação aos contextos onde não há uso do Eloquent e, mostre um exemplo de código que fundamente a sua resposta.
+
+O Eloquent do Laravel é como funciona o mapeamento de objeto relacional. Toda a manipulação do banco de dados é facilitada pelo Eloquent. Um exemplo disso é como ele faz uso da Model.
+
+Comando para criar a model:
+php artisan make:model User
+
+Estrutura de código de um exemplo de model:
+
+class User extends Model {
+
+    protected $table = 'my_users';
+
+}
+
+Como instanciar o uso da model em uma variável:
+
+$users = User::all();
+
+Outra coisa que o Eloquent tem que se faz melhor é na conexão com o banco de dados, uma vez que você pode relacioná-las em código sem precisar de um workbench. Isso possibilita facilidades na criação posterior de outras tabelas, relacionamentos e criação de elementos. 
+
+
+###################################################
+5.  Explique com suas palavras o que é, no Laravel, o Blade, e demonstre sua utilização em um trecho de código.
+
+O blade, no laravel, é um motor de template que possibilita e facilita o código em vários sentidos e maneiras. Não só criar simples views mas herança de componentes complexos e até manipulação de dados da controller em código sem uso bruto de PHP.
+Um exemplo disso é o template na blade. Para evitar a repetição de códigos, o laravel tem um recurso chamado @yield, onde você separa uma sessão para o conteúdo da página dentro de um template que já possui a estrutura do HTML padrão (header, footer, meta, scripts, links, etc).
+
+<html>
+    <head>
+        <title>App Name - @yield('title')</title>
+    </head>
+    <body>
+        @section('sidebar')
+            This is the master sidebar.
+        @show
+
+        <div class="container">
+            @yield('content')
+        </div>
+    </body>
+</html>
+E, com o template já pronto, as próximas páginas do sistema terão essa estrutura:
+
+@extends('layouts.app')
+
+@section('title', 'Page Title')
+
+@section('sidebar')
+    @parent
+
+    <p>This is appended to the master sidebar.</p>
+@endsection
+
+@section('content')
+    <p>This is my body content.</p>
+@endsection
+
+
+###################################################
+6. Qual(is) comando(s) Artisan você usaria para criar uma Model, um Controller e uma Migration?
+
+Model: php artisan make:model User
+Controller: php artisan make:controller UserController
+Migration: php artisan make:migration User
+Todos de uma vez: php artisan male:model User -mcr
+
+###################################################
+7.Considerando um repositório GIT local, ligado à um repositório remoto. Você precisa criar uma nova branch
+chamada "card#1000" para realizar uma demanda e ela precisa ser baseada na branch "dev". Após realizar as alterações de código na
+branch "card#1000", você deve mesclá-la (merge) com a branch de "teste". Sabendo que, ao final, todas as branchs deverão estar no
+repositório remoto, demostre a sequencia de comandos GIT necessários para realizar esse fluxo.
+
+Entrar na branch de dev com: git checkout dev. Dentro da branch de dev, rodar o comando git checkout -b card#1000 => ele cria a branch com o nome que eu setar a partir da branch atual (no caso a dev).
+Nisso, dentro da branch card#1000, faço as modificações necessárias e, terminando, supondo que a branch teste já exista, entrar na branch de teste: git checkout teste e depois para mesclar teste com card#1000: git merge card#1000. E depois o git push para subir as alterações.
